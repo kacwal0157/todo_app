@@ -1,1 +1,1 @@
-const String welcomeSplashImage = 'assets/images/welcome_image.png';
+const String welcomeSplashImage = 'assets/images/rest/welcome_image.png';

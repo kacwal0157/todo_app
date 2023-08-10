@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                        .copyWith(fontWeight: FontWeight.normal),
                   ),
                 ],
               ),

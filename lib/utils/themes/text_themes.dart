@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 
 class AppTextTheme {
   static TextTheme lightTextTheme = const TextTheme(
-    headlineSmall:
-        TextStyle(fontFamily: 'Barlow', fontSize: 16.0, color: Colors.black),
-    headlineMedium:
-        TextStyle(fontFamily: 'Barlow', fontSize: 24.0, color: Colors.black),
-    headlineLarge:
-        TextStyle(fontFamily: 'Barlow', fontSize: 32.0, color: Colors.black),
+    headlineSmall: TextStyle(
+        fontFamily: 'Barlow',
+        fontSize: 16.0,
+        color: Colors.black,
+        fontWeight: FontWeight.bold),
+    headlineMedium: TextStyle(
+        fontFamily: 'Barlow',
+        fontSize: 24.0,
+        color: Colors.black,
+        fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        fontFamily: 'Barlow',
+        fontSize: 32.0,
+        color: Colors.black,
+        fontWeight: FontWeight.bold),
     bodySmall:
         TextStyle(fontFamily: 'Poppins', fontSize: 16.0, color: Colors.black),
     bodyMedium:
@@ -16,12 +25,21 @@ class AppTextTheme {
         TextStyle(fontFamily: 'Poppins', fontSize: 32.0, color: Colors.black),
   );
   static TextTheme darkTextTheme = const TextTheme(
-    headlineSmall:
-        TextStyle(fontFamily: 'Barlow', fontSize: 16.0, color: Colors.white),
-    headlineMedium:
-        TextStyle(fontFamily: 'Barlow', fontSize: 24.0, color: Colors.white),
-    headlineLarge:
-        TextStyle(fontFamily: 'Barlow', fontSize: 32.0, color: Colors.white),
+    headlineSmall: TextStyle(
+        fontFamily: 'Barlow',
+        fontSize: 16.0,
+        color: Colors.white,
+        fontWeight: FontWeight.bold),
+    headlineMedium: TextStyle(
+        fontFamily: 'Barlow',
+        fontSize: 24.0,
+        color: Colors.white,
+        fontWeight: FontWeight.bold),
+    headlineLarge: TextStyle(
+        fontFamily: 'Barlow',
+        fontSize: 32.0,
+        color: Colors.white,
+        fontWeight: FontWeight.bold),
     bodySmall:
         TextStyle(fontFamily: 'Poppins', fontSize: 16.0, color: Colors.white),
     bodyMedium:
