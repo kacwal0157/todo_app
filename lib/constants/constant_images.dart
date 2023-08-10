@@ -1,0 +1,1 @@
+const String welcomeSplashImage = 'assets/images/welcome_image.png';
