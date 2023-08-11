@@ -8,3 +8,4 @@ const String appHeading = 'Explore Notes';
 const String appSearch = 'Search...';
 const String favouriteNotes = 'Favourite \nNotes';
 const String importantNotes = 'Important \nNotes';
+const String notesTitle = 'Your notes';
