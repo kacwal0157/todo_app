@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants/constant_images.dart';
 import 'package:todo_app/constants/constant_variables.dart';
-import 'package:todo_app/utils/user_icon_btn.dart';
+import 'package:todo_app/utils/components/user_icon_btn.dart';
 
 class UserNoteWidget extends StatefulWidget {
   const UserNoteWidget({required this.textTheme, super.key});

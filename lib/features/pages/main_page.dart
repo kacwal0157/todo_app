@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_app/constants/constant_texts.dart';
 import 'package:todo_app/constants/constant_variables.dart';
-import 'package:todo_app/features/components/color_box_widget.dart';
-import 'package:todo_app/features/components/expanded_note_widget.dart';
-import 'package:todo_app/features/components/user_note_widget.dart';
+import 'package:todo_app/data/color_box_data.dart';
+import 'package:todo_app/features/widgets/color_box_widget.dart';
+import 'package:todo_app/features/widgets/expanded_note_widget.dart';
+import 'package:todo_app/features/widgets/user_note_widget.dart';
+import 'package:todo_app/utils/components/app_bar.dart';
+import 'package:todo_app/utils/components/elevated_btn.dart';
+import 'package:todo_app/utils/routes.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,18 +24,11 @@ class _MainPageState extends State<MainPage> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(
-          Icons.menu_rounded,
-          color: Colors.black,
-        ),
-        title: Text(
-          appName,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+      appBar: getAppBar(
+        context: context,
+        iconData: Icons.menu_rounded,
+        title: appName,
+        onPressed: () {},
       ),
       body: Stack(
         children: [
@@ -75,27 +73,17 @@ class _MainPageState extends State<MainPage> {
                   ),
                   SizedBox(
                     height: 45,
-                    child: ListView(
+                    child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      children: [
-                        ColorBoxWidget(
-                            textTheme: textTheme,
-                            boxColor: Colors.yellow,
-                            boxTitle: 'Yellow Notes'),
-                        ColorBoxWidget(
-                            textTheme: textTheme,
-                            boxColor: Colors.green,
-                            boxTitle: 'Green Notes'),
-                        ColorBoxWidget(
-                            textTheme: textTheme,
-                            boxColor: Colors.blue,
-                            boxTitle: 'Blue Notes'),
-                        ColorBoxWidget(
-                            textTheme: textTheme,
-                            boxColor: Colors.red,
-                            boxTitle: 'Red Notes'),
-                      ],
+                      itemCount: colorBoxData.length,
+                      itemBuilder: (context, index) {
+                        return ColorBoxWidget(
+                          textTheme: textTheme,
+                          boxColor: colorBoxData[index].color,
+                          boxTitle: colorBoxData[index].title,
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -156,21 +144,17 @@ class _MainPageState extends State<MainPage> {
           Positioned(
             bottom: 20,
             right: 20,
-            child: ElevatedButton(
+            child: getElevatedBtn(
               onPressed: () {
-                print('add note');
+                Get.toNamed(Routes.getCreateNotePageRoute());
               },
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                backgroundColor: secondaryColor,
-                fixedSize: const Size.fromHeight(defaultSize * 2),
-              ),
               child: const Icon(
                 Icons.add,
                 size: 30,
               ),
+              shape: const CircleBorder(),
             ),
-          )
+          ),
         ],
       ),
     );
