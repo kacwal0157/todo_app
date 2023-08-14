@@ -5,6 +5,7 @@ import 'package:todo_app/constants/constant_texts.dart';
 import 'package:todo_app/constants/constant_variables.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/features/services/note_json_service.dart';
+import 'package:todo_app/features/services/note_service.dart';
 import 'package:todo_app/utils/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -95,8 +96,10 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     setState(() => animate = true);
-    AppManager.defaultNote = await loadNoteFromJson(widget.defaultNoteName);
-    
+    AppManager.defaultNote =
+        await loadNoteFromJson(noteFileName: widget.defaultNoteName);
+    await loadNotes(AppManager.notes);
+
     await Future.delayed(const Duration(milliseconds: 3000)).then(
       (value) => Get.toNamed(Routes.getMainPageRoute()),
     );

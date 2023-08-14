@@ -4,15 +4,21 @@ import 'package:todo_app/constants/constant_variables.dart';
 import 'package:todo_app/utils/components/user_icon_btn.dart';
 
 class UserNoteWidget extends StatefulWidget {
-  const UserNoteWidget({required this.textTheme, super.key});
+  const UserNoteWidget(
+      {required this.textTheme, required this.title, super.key});
 
   final TextTheme textTheme;
+  final String title;
 
   @override
   State<UserNoteWidget> createState() => _UserNoteWidgetState();
 }
 
 class _UserNoteWidgetState extends State<UserNoteWidget> {
+  _refreshPage() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,7 +44,7 @@ class _UserNoteWidgetState extends State<UserNoteWidget> {
                     children: [
                       Flexible(
                         child: Text(
-                          'Note Title',
+                          widget.title,
                           style: widget.textTheme.headlineSmall!
                               .apply(fontSizeFactor: 1.5),
                           maxLines: 2,
@@ -54,29 +60,20 @@ class _UserNoteWidgetState extends State<UserNoteWidget> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15),
+                const Padding(
+                  padding: EdgeInsets.only(left: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      getIconButton(
-                        onPressed: () {
-                          print('make favourite');
-                        },
-                        iconData: Icons.star_border_outlined,
-                      ),
-                      getIconButton(
-                        onPressed: () {
-                          print('make important');
-                        },
-                        iconData: Icons.announcement_outlined,
-                      ),
-                      getIconButton(
-                        onPressed: () {
-                          print('delete');
-                        },
-                        iconData: Icons.delete_outline_rounded,
-                      ),
+                      IconBtn(
+                          iconType: IconType.favourite,
+                          iconData: Icons.star_border_outlined),
+                      IconBtn(
+                          iconType: IconType.important,
+                          iconData: Icons.announcement_outlined),
+                      IconBtn(
+                          iconType: IconType.delete,
+                          iconData: Icons.delete_outline_rounded),
                     ],
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_app/app_manager.dart';
 import 'package:todo_app/constants/constant_texts.dart';
 import 'package:todo_app/constants/constant_variables.dart';
 import 'package:todo_app/data/color_box_data.dart';
@@ -23,16 +24,16 @@ class _MainPageState extends State<MainPage> {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      appBar: getAppBar(
-        context: context,
-        iconData: Icons.menu_rounded,
-        title: appName,
-        onPressed: () {},
-      ),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: getAppBar(
+            context: context,
+            iconData: Icons.menu_rounded,
+            title: appName,
+            onPressed: () {},
+          ),
+          body: SingleChildScrollView(
             child: Container(
               padding: const EdgeInsets.all(defaultPadding * 2),
               child: Column(
@@ -118,45 +119,43 @@ class _MainPageState extends State<MainPage> {
                     height: defaultSize,
                   ),
                   Column(
-                    children: [
-                      //TODO: MAKE BUILDER THAT CREATES PROPER AMOUNT OF NOTES
-                      UserNoteWidget(
-                        textTheme: textTheme,
-                      ),
-                      UserNoteWidget(
-                        textTheme: textTheme,
-                      ),
-                      UserNoteWidget(
-                        textTheme: textTheme,
-                      ),
-                      UserNoteWidget(
-                        textTheme: textTheme,
-                      ),
-                      UserNoteWidget(
-                        textTheme: textTheme,
-                      ),
-                    ],
+                    children: AppManager.notes.isNotEmpty
+                        ? AppManager.notes
+                            .map((note) => UserNoteWidget(
+                                textTheme: textTheme, title: note.noteTitle))
+                            .toList()
+                        : [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 50),
+                              child: Center(
+                                child: Text(
+                                  'Nothing to see here...\nAdd notes to see them here. :)',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ),
+                            ),
+                          ],
                   ),
                 ],
               ),
             ),
           ),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: getElevatedBtn(
-              onPressed: () {
-                Get.toNamed(Routes.getCreateNotePageRoute());
-              },
-              child: const Icon(
-                Icons.add,
-                size: 30,
-              ),
-              shape: const CircleBorder(),
+        ),
+        Positioned(
+          bottom: 20,
+          right: 20,
+          child: getElevatedBtn(
+            onPressed: () {
+              Get.toNamed(Routes.getCreateNotePageRoute());
+            },
+            child: const Icon(
+              Icons.add,
+              size: 30,
             ),
+            shape: const CircleBorder(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

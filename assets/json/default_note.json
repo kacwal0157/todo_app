@@ -1,4 +1,10 @@
 {
     "noteTitle": "New Note",
-    "noteContent": "Enter your note here."
+    "noteContent": "Enter your note here.",
+    "specialSignature":
+    {
+        "favourite": false,
+        "important": false,
+        "marked": ["false", "null"]
+    }
 }

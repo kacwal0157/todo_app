@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/app_manager.dart';
 import 'package:todo_app/constants/constant_variables.dart';
+import 'package:todo_app/features/services/create_note_service.dart';
 import 'package:todo_app/utils/components/app_bar.dart';
 import 'package:todo_app/utils/components/elevated_btn.dart';
 import 'package:todo_app/utils/components/text_field.dart';
@@ -17,6 +18,20 @@ class CreateNotePage extends StatefulWidget {
 class _CreateNotePageState extends State<CreateNotePage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
+
+  String? titleError;
+  String? contentError;
+
+  void _updateErrors(String? titleError, String? contentError) {
+    setState(() {
+      this.titleError = titleError;
+      this.contentError = contentError;
+    });
+  }
+
+  _refreshPage() {
+    setState(() {});
+  }
 
   @override
   void dispose() {
@@ -39,27 +54,18 @@ class _CreateNotePageState extends State<CreateNotePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                getIconButton(
-                  onPressed: () {
-                    print('make favourite');
-                  },
-                  iconData: Icons.star_border_outlined,
-                ),
-                getIconButton(
-                  onPressed: () {
-                    print('make special');
-                  },
-                  iconData: Icons.bookmark_border_rounded,
-                ),
-                getIconButton(
-                  onPressed: () {
-                    print('make important');
-                  },
-                  iconData: Icons.announcement_outlined,
-                ),
+                IconBtn(
+                    iconType: IconType.favourite,
+                    iconData: Icons.star_border_outlined),
+                IconBtn(
+                    iconType: IconType.mark,
+                    iconData: Icons.bookmark_border_rounded),
+                IconBtn(
+                    iconType: IconType.important,
+                    iconData: Icons.announcement_outlined),
               ],
             ),
             const SizedBox(
@@ -75,6 +81,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                       controller: titleController,
                       labelText: 'Note Title',
                       hintText: AppManager.defaultNote.noteTitle,
+                      errorMessage: titleError,
                       maxLines: 1,
                       expands: false,
                     ),
@@ -84,6 +91,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                         controller: contentController,
                         labelText: 'Note Content',
                         hintText: AppManager.defaultNote.noteContent,
+                        errorMessage: contentError,
                         minLines: null,
                         maxLines: null,
                         expands: true,
@@ -98,7 +106,8 @@ class _CreateNotePageState extends State<CreateNotePage> {
             ),
             getElevatedBtn(
               onPressed: () {
-                print('save note if correct');
+                validateNewNote(
+                    titleController, contentController, _updateErrors);
               },
               child: const Text('Save Note'),
               shape: RoundedRectangleBorder(

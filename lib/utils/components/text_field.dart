@@ -8,6 +8,7 @@ TextField getTextField({
   int? minLines,
   int? maxLines,
   required bool expands,
+  String? errorMessage,
 }) =>
     TextField(
       controller: controller,
@@ -23,6 +24,7 @@ TextField getTextField({
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: secondaryColor),
         ),
+        errorText: errorMessage,
         hintText: hintText,
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: secondaryColor),
