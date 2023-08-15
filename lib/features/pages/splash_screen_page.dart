@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/app_manager.dart';
 import 'package:todo_app/constants/constant_images.dart';
 import 'package:todo_app/constants/constant_texts.dart';
 import 'package:todo_app/constants/constant_variables.dart';
 import 'package:get/get.dart';
-import 'package:todo_app/features/services/note_json_service.dart';
 import 'package:todo_app/features/services/note_service.dart';
 import 'package:todo_app/utils/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
-
-  final String defaultNoteName = 'default_note';
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -96,9 +92,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     setState(() => animate = true);
-    AppManager.defaultNote =
-        await loadNoteFromJson(noteFileName: widget.defaultNoteName);
-    await loadNotes(AppManager.notes);
+    await loadNotes();
 
     await Future.delayed(const Duration(milliseconds: 3000)).then(
       (value) => Get.toNamed(Routes.getMainPageRoute()),

@@ -29,10 +29,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
     });
   }
 
-  _refreshPage() {
-    setState(() {});
-  }
-
   @override
   void dispose() {
     titleController.dispose();
@@ -47,25 +43,39 @@ class _CreateNotePageState extends State<CreateNotePage> {
         context: context,
         iconData: Icons.arrow_back_rounded,
         title: 'New Note',
-        onPressed: () => Get.back(),
+        onPressed: () {
+          AppManager.isNoteFavourite = false;
+          AppManager.isNoteImportant = false;
+
+          Get.back();
+        },
       ),
       body: Container(
         padding: const EdgeInsets.all(defaultPadding * 2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconBtn(
-                    iconType: IconType.favourite,
-                    iconData: Icons.star_border_outlined),
+                  iconType: IconType.favourite,
+                  iconData: Icons.star_border_outlined,
+                  note: AppManager.defaultNote,
+                  state: AppManager.isNoteFavourite,
+                ),
                 IconBtn(
-                    iconType: IconType.mark,
-                    iconData: Icons.bookmark_border_rounded),
+                  iconType: IconType.mark,
+                  iconData: Icons.bookmark_border_rounded,
+                  note: AppManager.defaultNote,
+                  state: false,
+                ),
                 IconBtn(
-                    iconType: IconType.important,
-                    iconData: Icons.announcement_outlined),
+                  iconType: IconType.important,
+                  iconData: Icons.announcement_outlined,
+                  note: AppManager.defaultNote,
+                  state: AppManager.isNoteImportant,
+                ),
               ],
             ),
             const SizedBox(

@@ -19,6 +19,16 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  _refreshMainPage() {
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    AppManager.mainPageCallback = _refreshMainPage;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -121,8 +131,13 @@ class _MainPageState extends State<MainPage> {
                   Column(
                     children: AppManager.notes.isNotEmpty
                         ? AppManager.notes
-                            .map((note) => UserNoteWidget(
-                                textTheme: textTheme, title: note.noteTitle))
+                            .map(
+                              (note) => UserNoteWidget(
+                                textTheme: textTheme,
+                                title: note.noteTitle,
+                                note: note,
+                              ),
+                            )
                             .toList()
                         : [
                             Padding(

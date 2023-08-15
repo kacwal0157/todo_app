@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants/constant_images.dart';
 import 'package:todo_app/constants/constant_variables.dart';
+import 'package:todo_app/features/models/note.dart';
 import 'package:todo_app/utils/components/user_icon_btn.dart';
 
 class UserNoteWidget extends StatefulWidget {
   const UserNoteWidget(
-      {required this.textTheme, required this.title, super.key});
+      {required this.textTheme,
+      required this.title,
+      required this.note,
+      super.key});
 
   final TextTheme textTheme;
   final String title;
+  final Note note;
 
   @override
   State<UserNoteWidget> createState() => _UserNoteWidgetState();
 }
 
 class _UserNoteWidgetState extends State<UserNoteWidget> {
-  _refreshPage() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -60,20 +61,29 @@ class _UserNoteWidgetState extends State<UserNoteWidget> {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 15),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       IconBtn(
-                          iconType: IconType.favourite,
-                          iconData: Icons.star_border_outlined),
+                        iconType: IconType.favourite,
+                        iconData: Icons.star_border_outlined,
+                        note: widget.note,
+                        state: widget.note.specialSignature.favourite,
+                      ),
                       IconBtn(
-                          iconType: IconType.important,
-                          iconData: Icons.announcement_outlined),
+                        iconType: IconType.important,
+                        iconData: Icons.announcement_outlined,
+                        note: widget.note,
+                        state: widget.note.specialSignature.important,
+                      ),
                       IconBtn(
-                          iconType: IconType.delete,
-                          iconData: Icons.delete_outline_rounded),
+                        iconType: IconType.delete,
+                        iconData: Icons.delete_outline_rounded,
+                        note: widget.note,
+                        state: false,
+                      ),
                     ],
                   ),
                 ),

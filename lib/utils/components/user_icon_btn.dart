@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/constants/constant_variables.dart';
+import 'package:todo_app/features/models/note.dart';
+import 'package:todo_app/features/services/user_btn_service.dart';
 
 enum IconType {
   delete,
@@ -9,10 +11,17 @@ enum IconType {
 }
 
 class IconBtn extends StatefulWidget {
-  const IconBtn({required this.iconType, required this.iconData, super.key});
+  const IconBtn(
+      {required this.iconType,
+      required this.iconData,
+      required this.note,
+      required this.state,
+      super.key});
 
   final IconType iconType;
   final IconData iconData;
+  final Note note;
+  final bool state;
 
   @override
   State<IconBtn> createState() => _IconBtnState();
@@ -23,6 +32,8 @@ class _IconBtnState extends State<IconBtn> {
 
   @override
   Widget build(BuildContext context) {
+    iconColor = _getIconColor(widget.state, widget.iconType);
+
     return IconButton(
       onPressed: () => showDialog(
         context: context,
@@ -73,6 +84,21 @@ class _IconBtnState extends State<IconBtn> {
     );
   }
 
+  _getIconColor(bool state, IconType iconType) {
+    if (state) {
+      switch (iconType) {
+        case IconType.favourite:
+          return Colors.yellow;
+        case IconType.important:
+          return Colors.red;
+        default:
+          return iconColor;
+      }
+    }
+
+    return iconColor;
+  }
+
   String _getAlertText(IconType iconType) {
     String text = '';
 
@@ -97,19 +123,24 @@ class _IconBtnState extends State<IconBtn> {
     return text;
   }
 
-  _getAction(IconType iconType) {
+  _getAction(IconType iconType) async {
     Color newColor = Colors.grey;
 
     switch (iconType) {
       case IconType.delete:
+        await deleteNote(widget.note);
         break;
       case IconType.favourite:
         newColor = iconColor == Colors.grey ? Colors.yellow : Colors.grey;
+        bool isFavourite = iconColor == Colors.grey ? true : false;
+        await setNoteFavourite(note: widget.note, isFavourite: isFavourite);
         break;
       case IconType.mark:
         break;
       case IconType.important:
         newColor = iconColor == Colors.grey ? Colors.red : Colors.grey;
+        bool isImportant = iconColor == Colors.grey ? true : false;
+        await setNoteImportant(widget.note, isImportant);
         break;
       default:
         break;
