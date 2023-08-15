@@ -4,11 +4,12 @@ import 'package:todo_app/app_manager.dart';
 import 'package:todo_app/constants/constant_texts.dart';
 import 'package:todo_app/constants/constant_variables.dart';
 import 'package:todo_app/data/color_box_data.dart';
+import 'package:todo_app/features/services/main_page_service.dart';
 import 'package:todo_app/features/widgets/color_box_widget.dart';
 import 'package:todo_app/features/widgets/expanded_note_widget.dart';
-import 'package:todo_app/features/widgets/user_note_widget.dart';
 import 'package:todo_app/utils/components/app_bar.dart';
 import 'package:todo_app/utils/components/elevated_btn.dart';
+import 'package:todo_app/utils/components/user_icon_btn.dart';
 import 'package:todo_app/utils/routes.dart';
 
 class MainPage extends StatefulWidget {
@@ -72,7 +73,7 @@ class _MainPageState extends State<MainPage> {
                     child: Row(
                       children: [
                         Text(
-                          appSearch,
+                          appSearch, //* TO BE DEVELOPED
                           style: textTheme.bodyMedium!
                               .apply(color: Colors.grey.withOpacity(0.5)),
                         ),
@@ -89,7 +90,7 @@ class _MainPageState extends State<MainPage> {
                       shrinkWrap: true,
                       itemCount: colorBoxData.length,
                       itemBuilder: (context, index) {
-                        return ColorBoxWidget(
+                        return ColorBoxWidget( //* TO BE DEVELOPED
                           textTheme: textTheme,
                           boxColor: colorBoxData[index].color,
                           boxTitle: colorBoxData[index].title,
@@ -104,18 +105,22 @@ class _MainPageState extends State<MainPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ExpandedNoteWidget(
-                          textTheme: textTheme,
-                          icon: Icons.star_outline_rounded,
-                          noteName: favouriteNotes,
-                          size: size),
+                        textTheme: textTheme,
+                        icon: Icons.star_outline_rounded,
+                        noteName: favouriteNotes,
+                        size: size,
+                        iconType: IconType.favourite,
+                      ),
                       const SizedBox(
                         width: 5,
                       ),
                       ExpandedNoteWidget(
-                          textTheme: textTheme,
-                          icon: Icons.announcement_outlined,
-                          noteName: importantNotes,
-                          size: size),
+                        textTheme: textTheme,
+                        icon: Icons.announcement_outlined,
+                        noteName: importantNotes,
+                        size: size,
+                        iconType: IconType.important,
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -124,21 +129,14 @@ class _MainPageState extends State<MainPage> {
                   Text(
                     notesTitle,
                     style: textTheme.headlineMedium!.apply(fontSizeFactor: 1.2),
-                  ), //TODO: MAKE SORTING SYSTEM
+                  ),
                   const SizedBox(
                     height: defaultSize,
                   ),
                   Column(
                     children: AppManager.notes.isNotEmpty
-                        ? AppManager.notes
-                            .map(
-                              (note) => UserNoteWidget(
-                                textTheme: textTheme,
-                                title: note.noteTitle,
-                                note: note,
-                              ),
-                            )
-                            .toList()
+                        ? generateUserNoteWidgets(
+                            AppManager.notes, context, textTheme)
                         : [
                             Padding(
                               padding: const EdgeInsets.only(top: 50),

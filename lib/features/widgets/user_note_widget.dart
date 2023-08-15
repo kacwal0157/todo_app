@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_app/constants/constant_images.dart';
 import 'package:todo_app/constants/constant_variables.dart';
 import 'package:todo_app/features/models/note.dart';
 import 'package:todo_app/utils/components/user_icon_btn.dart';
+import 'package:todo_app/utils/routes.dart';
 
 class UserNoteWidget extends StatefulWidget {
   const UserNoteWidget(
@@ -24,7 +26,8 @@ class _UserNoteWidgetState extends State<UserNoteWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("open note");
+        Get.toNamed(Routes.getOpenNotePageRoute(),
+            arguments: {'note': widget.note});
       },
       child: Column(
         children: [

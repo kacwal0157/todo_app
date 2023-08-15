@@ -3,6 +3,7 @@ import 'package:todo_app/constants/constant_variables.dart';
 import 'package:todo_app/features/models/note.dart';
 import 'package:todo_app/features/services/user_btn_service.dart';
 
+//todo: move to const
 enum IconType {
   delete,
   favourite,

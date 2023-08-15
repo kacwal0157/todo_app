@@ -16,4 +16,8 @@ class AppManager {
 
   //*CALLBACK
   static VoidCallback mainPageCallback = () {};
+
+  //*STATES
+  static bool showFavourites = false;
+  static bool showImportant = false;
 }

@@ -42,7 +42,7 @@ class ColorBoxWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '## Notes', //TODO: MAKE SERVICE TO CALCULATE NOTES AMOUNT
+                  '0 Notes',
                   style: textTheme.bodySmall,
                   overflow: TextOverflow.ellipsis,
                 ),

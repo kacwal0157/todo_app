@@ -22,8 +22,6 @@ validateNewNote(
       AppManager.isNoteImportant = false;
 
       updateErrors(null, null);
-
-      //TODO:check if name exists
       Get.back();
     }
   } else if (isTitleNotEmpty == false && isContentNotEmpty) {
