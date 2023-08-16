@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app_manager.dart';
 import 'package:todo_app/constants/constant_variables.dart';
-import 'package:todo_app/utils/components/user_icon_btn.dart';
 
 class ExpandedNoteWidget extends StatefulWidget {
   const ExpandedNoteWidget(

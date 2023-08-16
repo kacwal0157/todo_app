@@ -9,7 +9,6 @@ import 'package:todo_app/features/widgets/color_box_widget.dart';
 import 'package:todo_app/features/widgets/expanded_note_widget.dart';
 import 'package:todo_app/utils/components/app_bar.dart';
 import 'package:todo_app/utils/components/elevated_btn.dart';
-import 'package:todo_app/utils/components/user_icon_btn.dart';
 import 'package:todo_app/utils/routes.dart';
 
 class MainPage extends StatefulWidget {
@@ -42,7 +41,7 @@ class _MainPageState extends State<MainPage> {
             context: context,
             iconData: Icons.menu_rounded,
             title: appName,
-            onPressed: () {},
+            onPressed: () {}, //* TO BE DEVELOPED
           ),
           body: SingleChildScrollView(
             child: Container(

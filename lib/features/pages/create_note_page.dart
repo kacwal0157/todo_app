@@ -64,12 +64,12 @@ class _CreateNotePageState extends State<CreateNotePage> {
                   note: AppManager.defaultNote,
                   state: AppManager.isNoteFavourite,
                 ),
-                IconBtn(
+                /*IconBtn(
                   iconType: IconType.mark,
                   iconData: Icons.bookmark_border_rounded,
                   note: AppManager.defaultNote,
                   state: false,
-                ),
+                ),*/ //* TO BE DEVELOPED
                 IconBtn(
                   iconType: IconType.important,
                   iconData: Icons.announcement_outlined,
@@ -95,7 +95,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                       maxLines: 1,
                       expands: false,
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: defaultSize),
                     Flexible(
                       child: getTextField(
                         controller: contentController,

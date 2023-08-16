@@ -6,8 +6,8 @@ class AppManager {
 
   //*NOTES
   static Note defaultNote = Note(
-      noteTitle: '.null',
-      noteContent: 'noteContent',
+      noteTitle: '',
+      noteContent: '',
       specialSignature:
           SpecialSignature(favourite: false, important: false, marked: []));
   static List<Note> notes = [];

@@ -14,7 +14,7 @@ Future<void> loadNotes() async {
   AppManager.notes.clear();
   final notesFolder = await _getDocumentDirectory();
 
-  if (AppManager.defaultNote.noteTitle == '.null') {
+  if (AppManager.defaultNote.noteTitle == '') {
     AppManager.defaultNote =
         await loadNoteFromJson(noteFileName: defaultNoteName);
   }

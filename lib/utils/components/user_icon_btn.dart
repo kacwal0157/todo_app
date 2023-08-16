@@ -3,14 +3,6 @@ import 'package:todo_app/constants/constant_variables.dart';
 import 'package:todo_app/features/models/note.dart';
 import 'package:todo_app/features/services/user_btn_service.dart';
 
-//todo: move to const
-enum IconType {
-  delete,
-  favourite,
-  important,
-  mark,
-}
-
 class IconBtn extends StatefulWidget {
   const IconBtn(
       {required this.iconType,
@@ -33,7 +25,7 @@ class _IconBtnState extends State<IconBtn> {
 
   @override
   Widget build(BuildContext context) {
-    iconColor = _getIconColor(widget.state, widget.iconType);
+    iconColor = getIconColor(widget.state, widget.iconType, iconColor);
 
     return IconButton(
       onPressed: () => showDialog(
@@ -78,50 +70,11 @@ class _IconBtnState extends State<IconBtn> {
         height: 70,
         padding: const EdgeInsets.all(10),
         child: Text(
-          _getAlertText(iconType),
+          getAlertText(iconType),
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ),
     );
-  }
-
-  _getIconColor(bool state, IconType iconType) {
-    if (state) {
-      switch (iconType) {
-        case IconType.favourite:
-          return Colors.yellow;
-        case IconType.important:
-          return Colors.red;
-        default:
-          return iconColor;
-      }
-    }
-
-    return iconColor;
-  }
-
-  String _getAlertText(IconType iconType) {
-    String text = '';
-
-    switch (iconType) {
-      case IconType.delete:
-        text = 'Do you want to remove your note?';
-        break;
-      case IconType.favourite:
-        text = 'Do you want to make this note favourite?';
-        break;
-      case IconType.mark:
-        text = 'Do you want to mark this note?';
-        break;
-      case IconType.important:
-        text = 'Do you want to make this note important?';
-        break;
-      default:
-        text = 'ERROR';
-        break;
-    }
-
-    return text;
   }
 
   _getAction(IconType iconType) async {

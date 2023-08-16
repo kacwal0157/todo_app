@@ -8,3 +8,11 @@ const double defaultPadding = 10.0;
 const Color primaryColor = Color(0xFF66bb6a);
 const Color secondaryColor = Color(0xFF272727);
 const Color backgroundColor = Color(0xFFF7F6F1);
+
+//*ENUMS
+enum IconType {
+  delete,
+  favourite,
+  important,
+  mark,
+}
